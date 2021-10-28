@@ -3,10 +3,7 @@ r = 2
 r2 = 3
 r3 = 4
 
-x = r.*cos(fi)
-y = r.*sin(fi)
 
-r1 = sqrt(x.^2+y.^2)
 
 fi2 = [0:pi/32:2*pi]
 
@@ -17,8 +14,8 @@ y2 = r2.*sin(fi2)
 x3 = r3.*cos(fi2)
 y3 = r3.*sin(fi2)
 
-hold on
 plot(x,y)
+hold on
 plot(x2,y2)
 plot(x3,y3)
 axis equal
