@@ -1,29 +1,38 @@
 kat = deg2rad(30)
-t = 0:0.001:1.0194
-t1 = 0:0.1:1.0194
+g = 9.81
+t = 0:0.001:1.094
 v0 = 10
-vx = v0.*cos(kat)
-vx1 = v0.*cos(kat).*ones(size(t1))
-vy = v0.*sin(kat)
-vy1 = v0.*sin(kat) - 9.81.*t.^2
-x = vx.*t
-y = (vy.*t) - ((9.81/2).*t.^2)
-x1 = vx1.*t1
-y1 = v0.*sin(kat) - 9.81.*t1.^2
-zasieg = (2.*(v0.^2).*sin(kat).*cos(kat))./9.81
-czaslotu = (2.*v0.*sin(kat))./9.81
+v0x = v0 .* cos(kat)
+v0y = v0 .* sin(kat)
+vx = linspace(v0x, v0x, 1095)
+vy = (v0 .* sin(kat)) - (g .* t)
+vy2 = linspace(0,0,1095)
+vx2 = linspace(0,0,1095)
+x = v0x .* t
+y = (v0y .* t) - (g ./ 2) .* t .^ 2
+speed = sqrt(vx(1:200:1095) .^ 2 + vy(1:200:1095) .^ 2)
+speed2 = strtrim(cellstr(num2str(speed'))')
+speed3 = sqrt(vx(1:50:1095) .^ 2 + vy(1:50:1095) .^ 2)
+
+subplot(3,1,1)
 plot(x,y)
 hold on
-quiver(0,0,vx/10,vy/10)
-quiver(0,0,vx/10,0)
-quiver(0,0,0,vy/10)
-
-quiver(x1(1:100:end),y1(1:100:end),vx1/10,vy1/10)
-quiver(0,0,vx/10,0)
-quiver(0,0,0,vy/10)
-
-
-
+quiver(x(1:200:1095), y(1:200:1095), (vx(1:200:1095))./10, (vy(1:200:1095))./10, 0)
+quiver(x(1:200:1095), y(1:200:1095), (vx(1:200:1095))./10, vy2(1:200:1095)./10, 0)
+quiver(x(1:200:1095), y(1:200:1095), (vx2(1:200:1095))./10, vy(1:200:1095)./10, 0)
 xlabel('\it{x}','FontSize', 14)
 ylabel('\it{y}','FontSize', 14)
 axis equal
+hold off
+subplot(3,1,2)
+plot(x,y)
+hold on
+quiver(x(1:200:1095), y(1:200:1095), (vx(1:200:1095))./10, (vy(1:200:1095))./10, 0)
+text(x(1:200:1095), y(1:200:1095), speed(1:6) + "m/s" )
+xlabel('\it{x}','FontSize', 14)
+ylabel('\it{y}','FontSize', 14)
+axis equal
+hold off
+subplot(3,1,3)
+plot(t(1:50:1095),speed3)
+xlim(0:1.094)
