@@ -20,8 +20,8 @@ hold on
 quiver(x(1:200:1095), y(1:200:1095), (vx(1:200:1095))./10, (vy(1:200:1095))./10, 0)
 quiver(x(1:200:1095), y(1:200:1095), (vx(1:200:1095))./10, vy2(1:200:1095)./10, 0)
 quiver(x(1:200:1095), y(1:200:1095), (vx2(1:200:1095))./10, vy(1:200:1095)./10, 0)
-xlabel('\it{x}','FontSize', 14)
-ylabel('\it{y}','FontSize', 14)
+xlabel('\it{x[m]}','FontSize', 14)
+ylabel('\it{y[m]}','FontSize', 14)
 axis equal
 hold off
 subplot(3,1,2)
@@ -29,10 +29,18 @@ plot(x,y)
 hold on
 quiver(x(1:200:1095), y(1:200:1095), (vx(1:200:1095))./10, (vy(1:200:1095))./10, 0)
 text(x(1:200:1095), y(1:200:1095), speed(1:6) + "m/s" )
-xlabel('\it{x}','FontSize', 14)
-ylabel('\it{y}','FontSize', 14)
+xlabel('\it{x[m]}','FontSize', 14)
+ylabel('\it{y[m]}','FontSize', 14)
 axis equal
 hold off
 subplot(3,1,3)
 plot(t(1:50:1095),speed3)
 xlim(0:1.094)
+dx = linspace(v0x, v0x, 1095)
+dy = v0y - g.*t
+
+hold on
+speed4 = sqrt(dx .^ 2 + dy .^ 2)
+plot(t,speed4)
+legend('sqrt(vx^2 + vy^2)','sqrt(dx/dt^2 + dy/dt^2)')
+
