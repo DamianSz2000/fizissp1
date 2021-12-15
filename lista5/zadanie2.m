@@ -8,5 +8,7 @@ x = ones(size(vy)).*0
 subplot(1,2,1)
 plot(t,y)
 hold on
-quiver(t2, y(1:0.25:3), x, vy)
+quiver(t2, y(1:25:301), x, vy)
 ylim([-3 6])
+y = y(1:25:301)
+text(t2, y, num2str(vy))
